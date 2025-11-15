@@ -44,7 +44,8 @@ function updateDisplay(value){
     if(shouldClearDisplay){
         clearDisplay();
     }
-    if(display.textContent === "0"){
+    if(display.textContent === "0" || display.textContent === "ERROR" || (shouldClearDisplay && currentOperator === null)){
+        clearAll();
         display.textContent = value;
     }
     else if(display.textContent.length >=14){
@@ -84,6 +85,9 @@ function compute(){
 
     let ans = String(operate(firstNum, secondNum, currentOperator));
     display.textContent = ans.includes(".") ? Math.round(ans * 100000) / 100000 : ans;
+
+    shouldClearDisplay = true;
+    currentOperator = null;
 }
 
 buttons.addEventListener("click", (e) => {
