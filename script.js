@@ -71,7 +71,7 @@ function clearAll(){
 }
 
 function updateOperator(operator){
-    if(currentOperator !== null || shouldClearDisplay){
+    if(currentOperator !== null){
         compute();
     }
 
@@ -81,6 +81,7 @@ function updateOperator(operator){
 }
 
 function compute(){
+    if(currentOperator === null || shouldClearDisplay) return;
     secondNum = display.textContent;
 
     let ans = String(operate(firstNum, secondNum, currentOperator));
