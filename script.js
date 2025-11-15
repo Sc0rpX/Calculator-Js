@@ -70,10 +70,10 @@ function clearAll(){
 }
 
 function updateOperator(operator){
-    if(currentOperator !== null){
+    if(currentOperator !== null || shouldClearDisplay){
         compute();
     }
-    
+
     currentOperator = operator;
     firstNum = display.textContent;
     shouldClearDisplay = true;
@@ -82,7 +82,8 @@ function updateOperator(operator){
 function compute(){
     secondNum = display.textContent;
 
-    display.textContent = operate(firstNum, secondNum, currentOperator);
+    let ans = String(operate(firstNum, secondNum, currentOperator));
+    display.textContent = ans.includes(".") ? Math.round(ans * 100000) / 100000 : ans;
 }
 
 buttons.addEventListener("click", (e) => {
